@@ -33,7 +33,11 @@ export default class Controller {
             console.log("connected to the log stream");
         }
         logSocket.onmessage = function (event) {
-            console.log(event.data.toString());
+            const reader = new FileReader();
+            reader.onload = function () {
+                console.log(reader.result);
+            }
+            reader.readAsText(event.data);
         }
     }
     disconnectFromSDL() {

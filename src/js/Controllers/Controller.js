@@ -29,11 +29,11 @@ export default class Controller {
         this.socket.onmessage = this.onmessage.bind(this)
         //start another websocket connection
         const logSocket = new WebSocket(logUrl);
-        logSocket.on('open', function () {
+        logSocket.onopen(function () {
             console.log("connected to the log stream");
         })
-        logSocket.on('message', function (data) {
-            console.log(data.toString());
+        logSocket.onmessage(function (data) {
+            console.log(data);
         })
     }
     disconnectFromSDL() {

@@ -32,8 +32,8 @@ export default class Controller {
         logSocket.onopen = function () {
             console.log("connected to the log stream");
         }
-        logSocket.onmessage = function (data) {
-            console.log(data);
+        logSocket.onmessage = function (event) {
+            console.log(event.data.toString());
         }
     }
     disconnectFromSDL() {

@@ -1,4 +1,5 @@
 let url = "ws://localhost:8087"
+let logUrl = "ws://localhost:8888"
 let file_access_base_url = "";
 import bcController from './BCController';
 import uiController from './UIController';
@@ -26,6 +27,14 @@ export default class Controller {
         this.socket.onopen = this.onopen.bind(this)
         this.socket.onclose = this.onclose.bind(this)
         this.socket.onmessage = this.onmessage.bind(this)
+        //start another websocket connection
+        const logSocket = new WebSocket(logUrl);
+        logSocket.on('open', function () {
+            console.log("connected to the log stream");
+        })
+        logSocket.on('message', function (data) {
+            console.log(data.toString());
+        })
     }
     disconnectFromSDL() {
         if (this.retry) {
